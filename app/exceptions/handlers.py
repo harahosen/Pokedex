@@ -5,21 +5,19 @@ from fastapi.responses import JSONResponse
 from utils.logger import logger
 from models.error_response import ErrorResponse, ErrorDetail
 
+# Exception for API failure
 class ExternalAPIError(Exception):
-    """Raised when an external API (PokéAPI or FunTranslations) fails."""
     def __init__(self, source: str, status_code: int, detail: str):
         self.source = source
         self.status_code = status_code
         self.detail = detail
 
+# Exception for translation failure
 class TranslationError(Exception):
-    """Raised when translation fails but not critically."""
     def __init__(self, message: str):
         self.message = message
 
 def register_exception_handlers(app: FastAPI):
-    """Register global exception handlers."""
-
     @app.exception_handler(ExternalAPIError)
     def external_api_error_handler(request: Request, exc: ExternalAPIError):
         logger.error(f"[{request.url.path}] {exc.source} API failed ({exc.status_code}): {exc.detail}")

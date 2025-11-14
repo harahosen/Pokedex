@@ -8,7 +8,6 @@ router = APIRouter(prefix="/pokemon", tags=["Pokemon"])
 
 @router.get("/{name}", response_model=PokemonResponse)
 def get_pokemon(name: str):
-    """Fetch basic Pokémon information."""
     pokemon = pokeapi.get_pokemon_data(name.lower())
     if not pokemon:
         raise HTTPException(status_code=404, detail="Pokémon not found")
@@ -16,7 +15,6 @@ def get_pokemon(name: str):
 
 @router.get("/translated/{name}", response_model=PokemonResponse)
 def get_translated_pokemon(name: str):
-    """Fetch Pokémon info and translated description."""
     pokemon = pokeapi.get_pokemon_data(name.lower())
     if not pokemon:
         raise HTTPException(status_code=404, detail="Pokémon not found")

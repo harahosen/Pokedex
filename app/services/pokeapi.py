@@ -6,7 +6,6 @@ from exceptions.handlers import ExternalAPIError
 from utils.config import POKEAPI_URL
 
 def get_pokemon_data(name: str):
-    """Fetch Pokémon information from the PokéAPI."""
     try:
         response = requests.get(f"{POKEAPI_URL}{name.lower()}")
         if response.status_code != 200:
