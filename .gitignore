@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Pyenv
+.python-version
+
+# FastAPI / Uvicorn
+*.log
+
+# Testing
+.pytest_cache/
+.cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# VSCode
+.vscode/
+.code-workspace
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Docker (optional, but useful)
+docker-data/
+docker-logs/
+*.tar
+**/.dockerignore
+
+# Environment variables
+.env
+.env.*
+!.env.example
