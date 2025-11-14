@@ -1,4 +1,4 @@
-#Pokedex API#
+# Pokedex API
 
 This is a simple implementation for a Pokedex API with two endpoints:
 
@@ -6,13 +6,13 @@ This is a simple implementation for a Pokedex API with two endpoints:
 2. One for a translated description of a pokemon taken from [Funtranslations](https://funtranslations.com/)
 
 
-##Premise##
+## Premise
 
 Despite my past professional experience with other languages, this is my first web project with Python - and I loved it! After having desingned the basic structure, I used some AI tools mostly as assistance or the use of the libraries needed, like FastAPI and Pytest. I took the project as an opportunity to learn, and I had fun with it. :)
 
-##Repo contents##
+## Repo contents
 
-###Structure###
+### Structure
 
 Inside the "app" folder there is all the logic:
 - main.py: generic orchestrator
@@ -21,7 +21,7 @@ Inside the "app" folder there is all the logic:
 - exceptions/handlers: error management
 - utils: utility files
 
-###Tests###
+### Tests
 
 The app will run without these files, but I included a bunch of tests I put in place with Pytest. They are marked with the following tags:
 - unit
@@ -32,11 +32,11 @@ The app will run without these files, but I included a bunch of tests I put in p
 
 In this way they could be run by tag, e.g.: ```python -m pytest -m integration```
 
-###Misc files###
+### Misc files
 
 Utility files for the app installation, git, Docker configuration... this kind of things
 
-##Basic configuration##
+## Basic configuration
 
 In order to use the app, be sure to have [Git](https://git-scm.com/install) and [Python](https://www.python.org/downloads/) installed (I used Python 3.13). Now you should be able to clone the repo. Now there are two possible ways to continue:
 
@@ -69,12 +69,17 @@ If you prefer to work with a GUI, instead of running the commands from point 3, 
  
 The final output should be something similar to these (first one created using the clickable URL, second one using curl inside the terminal):
 
-```name	"abra"
+1. Using the clickable link:
+```
+name	"abra"
 description	"Using its ability to read minds, it will identify impending danger and TELEPORT to safety."
 habitat	"urban"
-isLegendary	false```
+isLegendary	false
+```
 
-```StatusCode        : 200
+2. Using curl:
+```
+StatusCode        : 200
 StatusDescription : OK
 Content           : {"name":"ditto","description":"Capable of copying an enemy's genetic code to instantly transform itself into a duplicate of the enemy.","habitat":"urban","isLegendary":false}
 RawContent        : HTTP/1.1 200 OK
@@ -89,29 +94,30 @@ Images            : {}
 InputFields       : {}
 Links             : {}
 ParsedHtml        : mshtml.HTMLDocumentClass
-RawContentLength  : 174```
+RawContentLength  : 174
+```
 
 
-##Consideration before going on PROD##
+## Considerations before going on PROD
 
 This app is a simple POC: I tried to keep a clean and minimal architecture, but it is not production-ready. I will list here some possible improvements, but some of them could vary depending on the business needs.
 
-###Security###
+### Security
 
 There is no authentication for the app, while in a production-environment would probably need some kind of authorization.
 
-###Caching###
+### Caching
 
 There is no specific caching at the moment. In a first phase, it would be helpful at least a basic form of caching, leaving place for a more refined system in eventual future developments based on the scaling needs.
 
-###Versioning###
+### Versioning
 
 A proper versioning of the API could be helpful for future feature implementations.
 
-###Robustness and resiliency###
+### Robustness and resiliency
 
 A solid product would need a refined system for timeouts and retries, with the implementation of a rate limiter and eventually a load balancer. 
 
-###Testing###
+### Testing
 
 As written before, this is a simple POC. A complete product will need more specific tests than the ones I did, like performance and load tests. Moreover, accordingly with the business, some feature could be added, so a battery of acceptance tests would be needed (and consequently new unit an integration tests).
