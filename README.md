@@ -3,7 +3,12 @@
 This is a simple implementation for a Pokedex API with two endpoints:
 
 1. One for basic pokemon info taken from [PokeAPI](https://pokeapi.co/)
+- request example: ```http://localhost:5000/pokemon/mewtwo```
+- response example: ```{"name": "mewtwo","description": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.", "habitat": "rare","isLegendary": true}```
 2. One for a translated description of a pokemon taken from [Funtranslations](https://funtranslations.com/)
+- request example: ```http://localhost:5000/pokemon/translated/mewtwo```
+- response example: ```{"name": "mewtwo","description": "Created by a scientist after years of horrific gene splicing and dna engineering experiments, it was.","habitat": "rare","isLegendary": true}```
+- application logic: Yoda translation for pokemon with ```cave``` habitat or legendary; Shakespeare translation for all the others; standard description if for any reason it is not possible to apply a translation
 
 
 ## Premise
