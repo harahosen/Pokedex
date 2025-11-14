@@ -1,24 +1,26 @@
 # Pokedex API
-
 This is a simple implementation for a Pokedex API with two endpoints:
 
 1. One for basic pokemon info taken from [PokeAPI](https://pokeapi.co/)
-- request example: ```http://localhost:5000/pokemon/mewtwo```
-- response example: ```{"name": "mewtwo","description": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.", "habitat": "rare","isLegendary": true}```
 2. One for a translated description of a pokemon taken from [Funtranslations](https://funtranslations.com/)
-- request example: ```http://localhost:5000/pokemon/translated/mewtwo```
-- response example: ```{"name": "mewtwo","description": "Created by a scientist after years of horrific gene splicing and dna engineering experiments, it was.","habitat": "rare","isLegendary": true}```
-- application logic: Yoda translation for pokemon with ```cave``` habitat or legendary; Shakespeare translation for all the others; standard description if for any reason it is not possible to apply a translation
-
 
 ## Premise
+Despite my past professional experience with other languages, this is my first web project with Python - and I loved it!
 
-Despite my past professional experience with other languages, this is my first web project with Python - and I loved it! After having designed the basic structure, I used some AI tools mostly as assistance with the use of the libraries, like FastAPI and Pytest. I took the project as an opportunity to learn, and I had fun with it. :)
+After having designed the basic structure, I used some AI tools, mostly as assistance with the use of the libraries, like FastAPI and Pytest. I took the project as an opportunity to learn, and I had a lot of fun with it. :)
+
+## App logic
+1. Retrieve a basic set of pokemon information (name, description, habitat, if it is a legendary one or not) from [PokeAPI](https://pokeapi.co/)
+- request example: ```http://localhost:5000/pokemon/mewtwo```
+- response example: ```{"name": "mewtwo","description": "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments.", "habitat": "rare","isLegendary": true}```
+2. Depending on certain conditions, apply a specific translation  taken from [Funtranslations](https://funtranslations.com/) for the pokemon description
+- application logic: Yoda translation for pokemon legendary or with a ```cave``` habitat; Shakespeare translation for all the others; standard description if, for any reason, it is not possible to apply a translation
+- request example: ```http://localhost:5000/pokemon/translated/mewtwo```
+- response example: ```{"name": "mewtwo","description": "Created by a scientist after years of horrific gene splicing and dna engineering experiments, it was.","habitat": "rare","isLegendary": true}```
 
 ## Repo contents
 
 ### Structure
-
 All the application logic is inside the ```app``` folder:
 - ```main.py```: generic orchestrator
 - ```routes/pokemon.py```: endpoint definitions
@@ -27,7 +29,6 @@ All the application logic is inside the ```app``` folder:
 - ```utils```: utility files
 
 ### Tests
-
 The app will run without these files, but I included a bunch of basic tests I put in place with Pytest. They are marked with the following tags:
 - ```unit```
 - ```schema```
@@ -38,11 +39,9 @@ The app will run without these files, but I included a bunch of basic tests I pu
 In this way they can be run by tag, e.g.: ```python -m pytest -m integration```
 
 ### Misc files
-
 Utility files for the app installation, git, Docker configuration... this kind of thing
 
 ## Basic configuration
-
 In order to use the app, be sure to have [Git](https://git-scm.com/install) and [Python](https://www.python.org/downloads/) installed (I used Python 3.13 on Windows). Now you should be able to clone the repo. When you have the source code, there are two possible ways to continue:
 
 a) Run everything on local, following these steps from a terminal or with the IDE of your preference:
@@ -50,8 +49,8 @@ a) Run everything on local, following these steps from a terminal or with the ID
   2. Activate a virtual environment: ```.venv\Scripts\activate``` (Windows) or ```source venv/bin/activate``` (Linux/macOS)
   3. Install the needed dependencies (the file is included in the repo): ```pip install -r requirements.txt```
   4. Run uvicorn (be sure to be inside the "app" directory): ```uvicorn main:app --reload --host 0.0.0.0 --port 8000```
-  5. Now you should be able to use the app on local on the port 8000; to access it, you can click on the link provided by uvicorn, use curl or a tool like [HTTPie](https://httpie.io/app) (N.b.: you will need the [desktop app](https://httpie.io/download) to use it on local)
-  6. Modify the URL with the wanted endpoint, adding "/pokemon/<pokemon name>" for the basic info or "/pokemon/translated/<pokemon name>" for the version with the translated description
+  5. Now you should be able to use the app on local on the port 8000; to access it, you can click on the link provided by uvicorn, use curl or a tool like [HTTPie](https://httpie.io/app) (n.b.: you will need the [desktop app](https://httpie.io/download) to use it on local)
+  6. Modify the URL with the wanted endpoint, adding ```/pokemon/<pokemon name>``` for the basic info or ```/pokemon/translated/<pokemon name>``` for the version with the translated description
  
 b) Run the app using Docker. The easiest method is to install [Docker Desktop](https://www.docker.com/get-started/):
   1. Open Docker Desktop
@@ -67,7 +66,7 @@ If you prefer to work with a GUI, instead of running the commands from point 3, 
   2. Click on the "Run" button
   3. Open the "Optional settings" and on the "Host port" tab assign a preferred one (or write 0 if you want to use a random one)
   4. Under the container name and the container ID, you should be able to see a clickable link
-  5. Modify the URL with the wanted endpoint, adding "/pokemon/<pokemon name>" for the basic info or "/pokemon/translated/<pokemon name>" for the version with the translated description
+  5. Modify the URL with the wanted endpoint, adding ```/pokemon/<pokemon name>``` for the basic info or ```/pokemon/translated/<pokemon name>``` for the version with the translated description
   6. You can stop and delete the container using the dedicated buttons
   7. In a similar way, you can delete the image
  
@@ -104,25 +103,19 @@ RawContentLength  : 174
 
 
 ## Considerations before going on PROD
-
 This app is a simple POC: I tried to keep a clean and minimal architecture, but it is not production-ready. I will list here some possible improvements, but some of them could vary depending on the business needs.
 
 ### Security
-
 There is no authentication for the app, while in a production-environment it would probably need some kind of authorization.
 
 ### Caching
-
 There is no specific caching at the moment. In a first phase, it would be helpful to have at least a basic form of caching, leaving place for a more refined system in potential future enhancements based on the scaling needs.
 
 ### Versioning
-
 A proper versioning of the API could be helpful for future feature implementations.
 
 ### Robustness and resiliency
-
 A solid product would need a refined system for timeouts and retries, with the implementation of a rate limiter and potentially a load balancer. 
 
 ### Testing
-
-As written before, this is a simple POC. A complete product will need more specific tests than the ones I did, like performance and load tests. Moreover, depending on the business needs, some features could be added, so a battery of acceptance tests would be needed (and consequently new unit and integration tests).
+As written before, this is a simple POC. A complete product will need more specific tests, including performance and load tests. Moreover, depending on business needs, additional features may be required, so acceptance tests would be necessary (and new unit and integration tests would likely follow).
