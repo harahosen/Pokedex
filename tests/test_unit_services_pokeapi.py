@@ -3,7 +3,7 @@ import json
 
 # internal dependencies
 from app.services import pokeapi
-from app.exceptions.handlers import ExternalAPIError
+from exceptions.handlers import ExternalAPIError
 
 sample_response = {
     "name": "mew",
@@ -38,6 +38,7 @@ def test_get_pokemon_data_ok(monkeypatch):
 # test for an KO from the pokeapi service
 @pytest.mark.unit
 def test_get_pokemon_data_ko(monkeypatch):
-    monkeypatch.setattr("app.services.pokeapi.requests.get", lambda url: DummyFail())
+    monkeypatch.setattr(pokeapi.requests, "get", lambda url: DummyFail())
+    
     with pytest.raises(ExternalAPIError):
         pokeapi.get_pokemon_data("missingno")
