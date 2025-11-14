@@ -1,0 +1,15 @@
+# Core Framework
+fastapi==0.121.0
+uvicorn==0.38.0
+
+# HTTP Clients
+requests==2.32.5
+# httpx==0.28.1   # not for the POC
+
+# Testing
+pytest==8.4.2
+pytest-cov==7.0.0
+responses==0.25.8
+
+# Type validation
+pydantic==2.12
